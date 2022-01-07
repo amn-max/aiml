@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn.mixture import GaussianMixture
 import pdb
-df1 = pd.read_csv("clusterdata.csv")
+df1 = pd.read_csv("dataset.csv")
 print(df1)
 f1 = df1['Distance_Feature'].values
 f2 = df1['Speeding_Feature'].values

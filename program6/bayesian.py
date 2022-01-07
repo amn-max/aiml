@@ -79,7 +79,7 @@ def getAccuracy(testSet, predictions):
 
 
 def main():
-    filename="AIML06_Bayesian_classifier.csv"
+    filename="dataset.csv"
     splitRatio=0.67
     dataset=loadCsv(filename)
     trainingSet,testSet=splitDataset(dataset,splitRatio)
