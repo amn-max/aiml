@@ -5,14 +5,15 @@ with open('dataset.csv','r') as f:
     tmp_lst=np.array(list(reads))
 #print(tmp_lst)
 concept=np.array(tmp_lst[:,:-1])
+
 target=np.array(tmp_lst[:,-1])
+
 for i in range(len(target)):
     if(target[i]=='yes'):
         specific_h=concept[i]
         break
 h=[]
 generic_h=[['?' for i in range (len(specific_h))]for i in range (len(specific_h))]
-print(type(generic_h))
 
 for i in range(len(target)):
     if(target[i]=='yes'):
