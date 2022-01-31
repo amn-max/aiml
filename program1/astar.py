@@ -1,4 +1,4 @@
-from collections import deque
+
 class Graph:
     def __init__(self, adjac_lis):
         self.adjac_lis = adjac_lis
@@ -12,7 +12,8 @@ class Graph:
             'A': 1,
             'B': 1,
             'C': 1,
-            'D': 1
+            'D': 1,
+            'F': 1,
         }
 
         return H[n]
@@ -23,16 +24,18 @@ class Graph:
         closed_lst = set([])
 
 
-        poo = {}
-        poo[start] = 0
-        par = {}
-        par[start] = start
+        cost = {}
+        cost[start] = 0
+        
+        adj_list = {}
+        adj_list[start] = start
 
         while len(open_lst) > 0:
+            
             n = None
             for v in open_lst:
-                if n == None or poo[v] + self.h(v) < poo[n] + self.h(n):
-                    n = v;
+                if n == None or cost[v] + self.h(v) < cost[n] + self.h(n):
+                    n = v
 
             if n == None:
                 print('Path does not exist!')
@@ -40,9 +43,9 @@ class Graph:
             if n == stop:
                 reconst_path = []
 
-                while par[n] != n:
+                while adj_list[n] != n:
                     reconst_path.append(n)
-                    n = par[n]
+                    n = adj_list[n]
 
                 reconst_path.append(start)
 
@@ -56,17 +59,17 @@ class Graph:
 
                 if m not in open_lst and m not in closed_lst:
                     open_lst.add(m)
-                    par[m] = n
-                    poo[m] = poo[n] + weight
+                    adj_list[m] = n
+                    cost[m] = cost[n] + weight
 
                 else:
-                    if poo[m] > poo[n] + weight:
-                        poo[m] = poo[n] + weight
-                        par[m] = n
+                    if cost[m] > cost[n] + weight:
+                        cost[m] = cost[n] + weight
+                        adj_list[m] = n
 
-                        if m in closed_lst:
-                            closed_lst.remove(m)
-                            open_lst.add(m)
+                        # if m in closed_lst:
+                        #     closed_lst.remove(m)
+                        #     open_lst.add(m)
 
             open_lst.remove(n)
             closed_lst.add(n)
@@ -77,8 +80,9 @@ class Graph:
 
 adjac_lis = {
     'A': [('B', 1), ('C', 3), ('D', 7)],
-    'B': [('D', 5)],
-    'C': [('D', 12)]
+    'B': [('D', 5),('F', 2)],
+    'C': [('D', 12)],
+    'F': [('D',1)]
 }
 graph1 = Graph(adjac_lis)
 graph1.a_star_algorithm('A', 'D')
