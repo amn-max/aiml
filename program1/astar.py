@@ -23,10 +23,9 @@ class Graph:
         open_lst = set([start])
         closed_lst = set([])
 
-
         cost = {}
         cost[start] = 0
-        
+
         adj_list = {}
         adj_list[start] = start
 

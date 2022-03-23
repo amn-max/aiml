@@ -7,14 +7,18 @@ def loadCsv(filename):
     for i in range(len(dataset)):
         dataset[i] = [float(x) for x in dataset[i]]
     return dataset
+
 def splitDataset(dataset, splitRatio):
     trainSize = int(len(dataset) * splitRatio);
     trainSet = []
     copy = list(dataset);
+    
     while len(trainSet) < trainSize:
         index = random.randrange(len(copy));
         trainSet.append(copy.pop(index))
+        
     return [trainSet, copy]
+
 def separateByClass(dataset):
     separated = {}
     for i in range(len(dataset)):
@@ -23,24 +27,29 @@ def separateByClass(dataset):
             separated[vector[-1]] = []
         separated[vector[-1]].append(vector)
     return separated
+
 def mean(numbers):
     return sum(numbers)/float(len(numbers))
+
 def stdev(numbers):
     avg = mean(numbers)
     if len(numbers)==1:
         return 0
     variance = sum([pow(x-avg,2) for x in numbers])/float(len(numbers)-1)
     return math.sqrt(variance)
+
 def summarize(dataset):
     summaries = [(mean(attribute), stdev(attribute)) for attribute in zip(*dataset)];
     del summaries[-1]
     return summaries
+
 def summarizeByClass(dataset):
     separated=separateByClass(dataset)
     summaries={}
     for classValue, instances in separated.items():
         summaries[classValue] = summarize(instances)
     return summaries
+
 def calculateProbability(x, mean, stdev):
     if stdev == 0.0:
         return 0
@@ -56,6 +65,7 @@ def calculateClassProbabilities(summaries, inputVector):
             x = inputVector[i]
             probabilities[classValue] *= calculateProbability(x, mean,stdev);
     return probabilities
+
 def predict(summaries, inputVector):
     probabilities = calculateClassProbabilities(summaries, inputVector)
     bestLabel, bestProb = None, -1
@@ -64,12 +74,14 @@ def predict(summaries, inputVector):
             bestProb = probability
             bestLabel = classValue
     return bestLabel
+
 def getPredictions(summaries, testSet):
     predictions = []
     for i in range(len(testSet)):
         result = predict(summaries, testSet[i])
         predictions.append(result)
     return predictions
+
 def getAccuracy(testSet, predictions):
     correct = 0
     for i in range(len(testSet)):
