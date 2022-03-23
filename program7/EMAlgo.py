@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.cluster import KMeans
-import pdb
+
 df1 = pd.read_csv("dataset.csv")
 print(df1)
 f1 = df1['Distance_Feature'].values
