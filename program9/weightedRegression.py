@@ -1,6 +1,3 @@
-#you can use this program as well https://medium.com/100-days-of-algorithms/day-97-locally-weighted-regression-c9cfaff087fb
-#video https://www.youtube.com/watch?v=ZSWs9Kj_10I
-
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
