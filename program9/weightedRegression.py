@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-import pdb
+
 def kernel(point, xmat, k):
 	m,n=np.shape(xmat)  #size of matrix m
 	weights=np.mat(np.eye(m)) #np.eye returns mat with 1 in the diagonal 
@@ -45,4 +45,3 @@ ax.plot(xsort[:,1],ypred[SortIndex],color='red',linewidth=1)
 plt.xlabel('Total bill')
 plt.ylabel('tip')
 plt.show()
-pdb.set_trace()
